@@ -339,8 +339,6 @@
 
   .blob-content {
         z-index: 1;
-        width: 100%;
-        max-width: 80%;
       }
 
   .blobs {
@@ -567,12 +565,11 @@ textarea:hover {
 
       <!-- Section 5 -->
       <section>
-        <h2>Here are the forecasted results of future Area Harvested in the future year-quarter (in hectares):</h2>
+        <h2>Here are the forecasted results of future Volume Production in the future year-quarter (in hectares):</h2>
 
         <p>
           <!-- Display the forecasted data here -->
         {% if prediction_df %}
-          
         <table>
             <tr>
                 <th>Year</th>
@@ -591,13 +588,14 @@ textarea:hover {
         </table>
         <h2>Textual representation:</h2>
         <p>
-            The Area Harvested forecast presents that the future Area Harvested in Nueva Vizcaya in the next {{ num_years }} years:
+            The Volume Production forecast presents that the future Volume Production in Nueva Vizcaya in the next {% if number %}{{ num_years }}{% endif %} years:
            <p> - Quarter 1 of years 2023-2025 will increase. </p>
            <p> - Quarter 2 of years 2023-2025 will decline. </p>
            <p> - Quarter 3 of years 2023-2025 will decline. </p>
            <p> - Quarter 4 of years 2023-2025 will increase. </p>
         </p>
         </p>
+        
       </section>
 
 
@@ -638,7 +636,7 @@ textarea:hover {
                             tickangle: -90
                         },
                         yaxis: {
-                            title: 'Area Harvested'
+                            title: 'Volume Production'
                         }
                     };
             

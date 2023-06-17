@@ -39,7 +39,7 @@
     <!--Scripts-->
     <script src="https://cdn.jsdelivr.net/npm/kute.js@2.1.2/dist/kute.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-    <!-- <script src ="https://code.jquery.com/jquery-3.7.0.min.js"></script> -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script
       src="https://static.elfsight.com/platform/platform.js"
       data-use-service-core
@@ -605,8 +605,9 @@
               ></path>
             </g>
           </svg>
+          <a href="/index">
           TomatoCare
-
+          </a>
           <!-- Tomato Modal -->
           <div class="container">
             <div id="tomato">
@@ -624,6 +625,12 @@
       <form method="POST" action="/forecasting">
         <label for="num_years">Number of Years for Forecasting:</label>
         <input type="number" id="num_years" name="num_years" min="1" required />
+        <select name="selected_option" id="selected_option">
+          <option value="">Select Forecast Option</option>
+          <option value="AreaHarvested">Area Harvested</option>
+          <option value="VolumeProduction">Volume Production</option>
+          <option value="FarmgatePrices">Farmgate Prices</option>
+        </select>
         <button type="submit">Forecast</button>
       </form>
 
@@ -694,6 +701,7 @@
           { path: "#blob2" },
           { repeat: 999, duration: 3000, yoyo: true }
         ).start();
+
       </script>
     </section>
 
