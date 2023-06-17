@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" contents="ie=edge" />
+
+    <link
+      href="https://fonts.googleapis.com/css?family=Montserrat+Alternates', rel='stylesheet', type='text/css"
+    />
+
+    <!--Import Google Icon Font-->
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />
+
+    <!-- Compiled and minified CSS -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"
+    />
+
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+
+    <title>TomatoCare</title>
+
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+        background: yellowgreen;
+        font-family: "segoe UI", verdana, arial;
+      }
+
+      .container {
+        display: flex;
+        justify-content: center;
+        margin-top: 100px;
+      }
+
+      #tomato {
+        background: #ff6347;
+        height: 50px;
+        width: 100px;
+        border-radius: 0 0 50px 50px;
+        position: relative;
+        animation: tomatoScale 0.3s ease-in-out infinite alternate;
+      }
+
+      @keyframes tomatoScale {
+        0% {
+          transform: scale(1);
+        }
+        100% {
+          transform: scale(1.2);
+        }
+      }
+
+      #tomato::before {
+        content: "";
+        width: 32px;
+        height: 32px;
+        border: 1px solid #ff6347;
+        background: #ff6347;
+        position: absolute;
+        border-radius: 0 32px 0 0;
+        top: -32px;
+        right: 0;
+        transition: all 0.2s ease-in-out;
+      }
+
+      #tomato::after {
+        content: "";
+        width: 32px;
+        height: 32px;
+        border: 1px solid #ff6347;
+        background: #ff6347;
+        position: absolute;
+        border-radius: 32px 0 0 0;
+        top: -32px;
+        transition: all 0.2s ease-in-out;
+      }
+
+      #tomatoFill {
+        width: 36px;
+        height: 16px;
+        background: #ff6347;
+        position: absolute;
+        top: -16px;
+        left: 32px;
+        transition: all 0.2s ease-in-out;
+      }
+
+      #tomatoFill::before {
+        content: "";
+        width: 18px;
+        height: 16px;
+        background: #ff6347;
+        position: absolute;
+        border-radius: 0 16px 0 0;
+        top: -16px;
+        transition: all 0.2s ease-in-out;
+      }
+
+      #tomatoFill::after {
+        content: "";
+        width: 18px;
+        height: 16px;
+        background: #ff6347;
+        position: absolute;
+        border-radius: 16px 0 0 0;
+        top: -16px;
+        right: 0;
+        transition: all 0.2s ease-in-out;
+      }
+
+      #tomatoTop {
+        background: #a8b848;
+        height: 16px;
+        width: 16px;
+        border-radius: 16px 0 16px 0;
+        position: absolute;
+        transform: rotateZ(135deg);
+        top: -16px;
+        z-index: 1;
+        left: 41px;
+        transition: all 0.2s ease-in-out;
+      }
+
+      #tomatoTop::before {
+        content: "";
+        background: #a8b848;
+        height: 16px;
+        width: 16px;
+        border-radius: 16px 0 16px 0;
+        position: absolute;
+        z-index: 1;
+        transform: rotateZ(90deg);
+        top: 12px;
+        transition: all 0.2s ease-in-out;
+      }
+
+      #tomatoTop::after {
+        content: "";
+        background: #a8b848;
+        height: 16px;
+        width: 16px;
+        border-radius: 16px 0 16px 0;
+        position: absolute;
+        z-index: 1;
+        transform: rotateZ(90deg);
+        top: -2px;
+        right: 13px;
+        transition: all 0.2s ease-in-out;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="container">
+      <div id="tomato">
+        <div id="tomatoTop"></div>
+        <div id="tomatoFill"></div>
+      </div>
+    </div>
+  </body>
+</html>
