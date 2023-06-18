@@ -5,7 +5,7 @@ import pandas as pd
 from statsmodels.tsa.arima.model import ARIMA
 import pyrebase
 import firebase_admin
-from firebase_admin import credentials, firestore
+from firebase_admin import credentials, firestore, auth, exceptions
 
 app = Flask(__name__)
 app.secret_key = "secret"
@@ -294,11 +294,10 @@ def signup():
         user = auth.create_user_with_email_and_password(email, password)
         # Store user details in Firestore database
         db.collection("users").document(user["localId"]).set(
-            {
-                "email": email,
-                "name": username,
-            }
+            {"email": email, "name": username, "emailVerified": False}
         )
+        # Send email verification link to the user
+        auth.send_email_verification(user["idToken"])
         return redirect("/login")
     else:
         return render_template("signup.html")
