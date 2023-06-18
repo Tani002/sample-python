@@ -1,15 +1,16 @@
-from flask import Flask, render_template, request, session, redirect, json
+from flask import Flask, render_template, request, session, redirect
 import pickle
 import numpy as np
 import pandas as pd
-import matplotlib.pyplot as plt
-from statsmodels.tsa.stattools import adfuller
-from statsmodels.graphics.tsaplots import plot_acf, plot_pacf
 from statsmodels.tsa.arima.model import ARIMA
-from sklearn.metrics import mean_squared_error
 import pyrebase
+import firebase_admin
+from firebase_admin import credentials, firestore
 
-# Load the model from the file
+app = Flask(__name__)
+app.secret_key = "secret"
+
+# Load the ARIMA models
 with open("ARIMA_VP.pkl", "rb") as f:
     model_vp = pickle.load(f)
 
@@ -19,8 +20,7 @@ with open("ARIMA_AH.pkl", "rb") as f:
 with open("ARIMA_FP.pkl", "rb") as f:
     model_fp = pickle.load(f)
 
-app = Flask(__name__, static_folder="static")
-
+# Initialize Firebase app
 config = {
     "apiKey": "AIzaSyBixtA4v5mvxKvaTU61iq9Fr2Ln2OWlf3o",
     "authDomain": "tomatocare-78e23.firebaseapp.com",
@@ -34,11 +34,19 @@ config = {
 firebase = pyrebase.initialize_app(config)
 auth = firebase.auth()
 
-app.secret_key = "secret"
+# Initialize the app with the service account credentials
+cred = credentials.Certificate(
+    "tomatocare-78e23-firebase-adminsdk-by348-b01efacff5.json"
+)
+firebase_admin.initialize_app(cred)
+db = firestore.client()
+
+# Routes
 
 
+# Define the route for the home page
 @app.route("/")
-def home_route():
+def index():
     return render_template("index.html")
 
 
@@ -71,7 +79,7 @@ def forecasting():
             test_data = data["AreaHarvested_log"].iloc[int(len(data) * 0.7) :]
             forecast = model_fit.forecast(steps=len(test_data))
 
-            # Step 2: Fit the ARIMA model
+            # Step 2: Fit the ARIMA modelg
             model = ARIMA(data["AreaHarvested_log"], order=(4, 1, 0))
             model_fit = model.fit()
 
@@ -247,75 +255,64 @@ def forecasting():
 #      return render_template('index.html', forecast_results=forecast_results)
 
 
-@app.route("/", methods=["POST", "GET"])
+# User login route
+@app.route("/login", methods=["GET", "POST"])
 def login():
-    # if "user" in session:
-    #     print("Redirecting to /index")
-    #     return redirect('/index')
-
     if request.method == "POST":
-        email = request.form.get("email")
-        password = request.form.get("password")
-        print("Email:", email)
-        print("Password:", password)
+        # Handle login form submission
+        email = request.form["email"]
+        password = request.form["password"]
         try:
+            # Sign in the user with email and password
             user = auth.sign_in_with_email_and_password(email, password)
-            session["user"] = email
-            print("User session set:", session["user"])
-            return redirect("/index")
+            # Store user session data
+            session["user"] = user
+            return redirect("/")
         except:
-            error = "Failed to login. Invalid email or password."
+            error = "Invalid email or password"
             return render_template("login.html", error=error)
-    return render_template("login.html")
+    else:
+        # Display login form
+        return render_template("login.html")
 
 
 @app.route("/logout")
 def logout():
-    session.pop("user")
+    # Clear user session data
+    session.pop("user", None)
     return redirect("/login")
-
-
-@app.route("/login")
-def user_login():
-    return render_template("login.html")
-
-
-@app.route("/profile")
-def user_profile():
-    if "user" not in session:
-        return redirect("login")
-    user_email = session["user"]
-    user_info = {
-        "name": "John Doe",
-        "email": user_email,
-        # Add more fields as needed
-    }
-
-    return render_template("profile.html", user_info=user_info)
-
-
-@app.route("/index")
-def index():
-    print(session)
-    if "user" not in session:
-        return redirect("/login")
-    return render_template("index.html")
 
 
 @app.route("/signup", methods=["GET", "POST"])
 def signup():
     if request.method == "POST":
-        try:
-            email = request.form.get("email")
-            password = request.form.get("password")
-            user = auth.create_user_with_email_and_password(email, password)
-            auth.send_email_verification(user["idToken"])
-            session["user"] = user
-            return redirect("/login")
-        except Exception as e:
-            error = str(e)
-            return render_template("signup.html", error=error)
-    return render_template("signup.html")
+        # Handle signup form submission
+        email = request.form["email"]
+        password = request.form["password"]
+        username = request.form["username"]
+        # Create a new user in Firebase Authentication
+        user = auth.create_user_with_email_and_password(email, password)
+        # Store user details in Firestore database
+        db.collection("users").document(user["localId"]).set(
+            {
+                "email": email,
+                "name": username,
+            }
+        )
+        return redirect("/login")
+    else:
+        return render_template("signup.html")
+
+
+@app.route("/profile")
+def user_profile():
+    if "user" in session:
+        user = session["user"]
+        # Fetch user profile data from Firestore based on user ID
+        profile = db.collection("users").document(user["localId"]).get().to_dict()
+        return render_template("profile.html", profile=profile)
+    else:
+        return redirect("/login")
 
 
 if __name__ == "__main__":
