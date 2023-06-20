@@ -11,13 +11,13 @@ app = Flask(__name__)
 app.secret_key = "secret"
 
 # Load the ARIMA models
-with open("ARIMA/ARIMA_VP.pkl", "rb") as f:
+with open("./ARIMA/ARIMA_VP.pkl", "rb") as f:
     model_vp = pickle.load(f)
 
-with open("ARIMA/ARIMA_AH.pkl", "rb") as f:
+with open("./ARIMA/ARIMA_AH.pkl", "rb") as f:
     model_ah = pickle.load(f)
 
-with open("ARIMA/ARIMA_FP.pkl", "rb") as f:
+with open("./ARIMA/ARIMA_FP.pkl", "rb") as f:
     model_fp = pickle.load(f)
 
 # Initialize Firebase app

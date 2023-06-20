@@ -12,7 +12,7 @@ import pickle
 warnings.filterwarnings("ignore")
 
 # Step 1: Load the data
-data = pd.read_csv("ARIMA/csv/AreaHarvested.csv")
+data = pd.read_csv("./ARIMA/csv/AreaHarvested.csv")
 
 # Convert 'Year' column to string type
 data["Year"] = data["Year"].astype(str)
