@@ -7,7 +7,7 @@ from sklearn.metrics import mean_squared_error
 import numpy as np
 
 # Step 1: Load the data
-data = pd.read_csv("VolumeDemand.csv")
+data = pd.read_csv("ARIMA/csv/VolumeDemand.csv")
 
 # To avoid using scientific notation
 pd.set_option("display.float_format", lambda x: "%d" % x)
@@ -106,7 +106,7 @@ rmse = np.sqrt(mean_squared_error(test_data, forecast))
 
 # Make actual predictions
 # User input for prediction
-# num_years = int(input("\nEnter the number of years ahead to predict: "))
+num_years = int(input("\nEnter the number of years ahead to predict: "))
 
 # Fit the ARIMA model using the actual series
 train_data = data["VolumeDemand"].iloc[: int(len(data) * 0.7)]

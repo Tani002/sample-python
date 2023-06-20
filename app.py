@@ -5,19 +5,19 @@ import pandas as pd
 from statsmodels.tsa.arima.model import ARIMA
 import pyrebase
 import firebase_admin
-from firebase_admin import credentials, firestore, auth, exceptions
+from firebase_admin import credentials, firestore, auth
 
 app = Flask(__name__)
 app.secret_key = "secret"
 
 # Load the ARIMA models
-with open("ARIMA_VP.pkl", "rb") as f:
+with open("ARIMA/ARIMA_VP.pkl", "rb") as f:
     model_vp = pickle.load(f)
 
-with open("ARIMA_AH.pkl", "rb") as f:
+with open("ARIMA/ARIMA_AH.pkl", "rb") as f:
     model_ah = pickle.load(f)
 
-with open("ARIMA_FP.pkl", "rb") as f:
+with open("ARIMA/ARIMA_FP.pkl", "rb") as f:
     model_fp = pickle.load(f)
 
 # Initialize Firebase app
@@ -32,7 +32,7 @@ config = {
 }
 
 firebase = pyrebase.initialize_app(config)
-auth = firebase.auth()
+firebase_auth = firebase.auth()
 
 # Initialize the app with the service account credentials
 cred = credentials.Certificate(
@@ -61,7 +61,7 @@ def forecasting():
 
         if selected_option == "AreaHarvested":
             # Step 1: Load the data
-            data = pd.read_csv("AreaHarvested.csv")
+            data = pd.read_csv("ARIMA/csv/AreaHarvested.csv")
 
             # Convert 'Year' column to string type
             data["Year"] = data["Year"].astype(str)
@@ -69,7 +69,6 @@ def forecasting():
 
             data["AreaHarvested_log"] = np.log(data["AreaHarvested"])
             train_data = data["AreaHarvested_log"].iloc[: int(len(data) * 0.7)]
-            train_data_diff = train_data.diff().dropna()
 
             # Step 3: Fit the ARIMA model
             model = ARIMA(train_data, order=(4, 1, 0))
@@ -139,7 +138,7 @@ def forecasting():
 
             # Render the forecasting_results.html template with the predicted data
             return render_template(
-                "forecasting_results.html",
+                "forecasting_AreaResults.html",
                 prediction_df=prediction_df.to_dict(orient="records"),
                 number=number,
                 formatted_changes=formatted_changes,
@@ -148,7 +147,7 @@ def forecasting():
 
         elif selected_option == "VolumeProduction":
             # Step 1: Load the data
-            data = pd.read_csv("VolumeProduction.csv")
+            data = pd.read_csv("ARIMA/csv/VolumeProduction.csv")
 
             # Convert 'Year' column to string type
             data["Year"] = data["Year"].astype(str)
@@ -156,7 +155,6 @@ def forecasting():
 
             data["VolumeProduction_log"] = np.log(data["VolumeProduction"])
             train_data = data["VolumeProduction_log"].iloc[: int(len(data) * 0.7)]
-            train_data_diff = train_data.diff().dropna()
 
             # Step 3: Fit the ARIMA model
             model = ARIMA(train_data, order=(4, 1, 0))
@@ -235,7 +233,7 @@ def forecasting():
 
         elif selected_option == "FarmgatePrices":
             # Step 1: Load the data
-            data = pd.read_csv("FarmgatePrices.csv")
+            data = pd.read_csv("ARIMA/csv/FarmgatePrices.csv")
 
             # To avoid using scientific notation
             pd.set_option("display.float_format", lambda x: "%d" % x)
@@ -246,7 +244,6 @@ def forecasting():
 
             data["FarmgatePrices"] = np.log(data["FarmgatePrices"])
             train_data = data["FarmgatePrices"].iloc[: int(len(data) * 0.7)]
-            train_data_diff = train_data.diff().dropna()
 
             # Step 3: Fit the ARIMA model
             model = ARIMA(train_data, order=(4, 1, 0))
@@ -325,7 +322,7 @@ def forecasting():
 
         elif selected_option == "VolumeDemand":
             # Step 1: Load the data
-            data = pd.read_csv("VolumeDemand.csv")
+            data = pd.read_csv("ARIMA/csv/VolumeDemand.csv")
 
             # To avoid using scientific notation
             pd.set_option("display.float_format", lambda x: "%d" % x)
@@ -336,7 +333,6 @@ def forecasting():
 
             data["VolumeDemand"] = np.log(data["VolumeDemand"])
             train_data = data["VolumeDemand"].iloc[: int(len(data) * 0.7)]
-            train_data_diff = train_data.diff().dropna()
 
             # Step 3: Fit the ARIMA model
             model = ARIMA(train_data, order=(4, 1, 0))
