@@ -1,12 +1,24 @@
 # sample-python
 
-## Setup
+## Description
 
-```bash
-py -3 -m venv venv
-venv\Scripts\activate
-pip install -r requirements.txt
-set FLASK_APP=app.py
-flask run --reload
-venv\Scripts\deactivate
+This is a sample python project.
+
+## Installation
+
+```powershell
+# Install Node dependencies
+npm install
+
+# Create python virtual environment
+python3 -m venv .venv
+
+# Activate python virtual environment
+.venv/bin/activate
+
+# Install python dependencies
+(.venv) pip install -r requirements.txt
+
+# Run Flask Application
+(.venv) flask run --port=8000 --debug
 ```
