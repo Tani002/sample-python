@@ -11,10 +11,10 @@ This is a sample python project.
 npm install
 
 # Create python virtual environment
-python3 -m venv .venv
+python -m venv .venv
 
 # Activate python virtual environment
-.venv/bin/activate
+.venv\Scripts\activate
 
 # Install python dependencies
 (.venv) pip install -r requirements.txt
