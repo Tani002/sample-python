@@ -585,7 +585,7 @@
 
       /* table */
       .tableScroll {
-        overflow-y: scroll;
+        overflow-y: auto;
         width: fit-content;
         max-height: 500px;
       }
@@ -758,26 +758,38 @@
 
     <!-- Section 1 -->
     <section class="pink">
-      <div class="blob-content">
+      <div class="blob-content" style="text-align: center">
         <h2>Textual representation:</h2>
-          
         <p>
-            The Area Harvested forecast presents that the future Area Harvested in Nueva Vizcaya in the next {{ number }} years:
-            <h2>Percentage Change:</h2>
-            <ul>
-        {% for change in formatted_changes %}
-          <p>{{ change }}</p>
-        {% endfor %}
-            </ul>
-            <!-- Display the average percent change -->
-            <p>Average Percent Change: {{ average_percent_change }}%</p>
-            <!-- Conditionally display output based on the sign of the average percent change -->
-            {% if average_percent_change > 0 %}
-            <p>The average percent change is positive: It implies that there is an expansion in tomato cultivation and a larger area is being utilized for harvesting. This can indicate potential market growth, increased supply, and possibly higher production levels.</p>
-            {% elif average_percent_change < 0 %}
-            <p>It implies a reduction in the area dedicated to tomato cultivation. This could be due to various factors such as shifting market demands, changes in agricultural practices, or challenges in production. It may indicate a need for adjustments in farming strategies or a potential decline in supply.</p>
-            {% endif %}
+          The Area Harvested forecast presents that the future Area Harvested in
+          Nueva Vizcaya in the next {{ number }} years:
         </p>
+
+        <h2>Percentage Change:</h2>
+        <ul>
+          {% for change in formatted_changes %}
+          <p>{{ change }}</p>
+          {% endfor %}
+        </ul>
+        <!-- Display the average percent change -->
+        <p>Average Percent Change: {{ average_percent_change }}%</p>
+        <!-- Conditionally display output based on the sign of the average percent change -->
+        {% if average_percent_change > 0 %}
+        <p>
+          The average percent change is positive: It implies that there is an
+          expansion in tomato cultivation and a larger area is being utilized
+          for harvesting. This can indicate potential market growth, increased
+          supply, and possibly higher production levels.
+        </p>
+        {% elif average_percent_change < 0 %}
+        <p>
+          It implies a reduction in the area dedicated to tomato cultivation.
+          This could be due to various factors such as shifting market demands,
+          changes in agricultural practices, or challenges in production. It may
+          indicate a need for adjustments in farming strategies or a potential
+          decline in supply.
+        </p>
+        {% endif %}
       </div>
 
       <svg

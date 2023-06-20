@@ -39,12 +39,12 @@
     <!--Scripts-->
     <script src="https://cdn.jsdelivr.net/npm/kute.js@2.1.2/dist/kute.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script
       src="https://static.elfsight.com/platform/platform.js"
       data-use-service-core
       defer
     ></script>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
 
     <!-- style -->
     <style>
@@ -246,6 +246,10 @@
         justify-content: center;
       }
 
+      .orange {
+        background: #dd3f31;
+      }
+
       .blue {
         background: #3c31dd;
       }
@@ -363,6 +367,8 @@
 
       .blob-content {
         z-index: 1;
+        width: 100%;
+        max-width: 80%;
       }
 
       .blobs {
@@ -376,132 +382,123 @@
         align-items: flex-start;
       }
 
+      /* Contact */
+      input::-webkit-input-placeholder,
+      textarea::-webkit-input-placeholder {
+        color: #aca49c;
+        font-size: 0.875em;
+      }
+
+      input:focus::-webkit-input-placeholder,
+      textarea:focus::-webkit-input-placeholder {
+        color: #bbb5af;
+      }
+
+      input::-moz-placeholder,
+      textarea::-moz-placeholder {
+        color: #aca49c;
+        font-size: 0.875em;
+      }
+
+      input:focus::-moz-placeholder,
+      textarea:focus::-moz-placeholder {
+        color: #bbb5af;
+      }
+
+      input::placeholder,
+      textarea::placeholder {
+        color: #aca49c;
+        font-size: 0.875em;
+      }
+
+      input:focus::placeholder,
+      textarea::focus:placeholder {
+        color: #bbb5af;
+      }
+
+      input::-ms-placeholder,
+      textarea::-ms-placeholder {
+        color: #aca49c;
+        font-size: 0.875em;
+      }
+
+      input:focus::-ms-placeholder,
+      textarea:focus::-ms-placeholder {
+        color: #bbb5af;
+      }
+
+      input:hover::-webkit-input-placeholder,
+      textarea:hover::-webkit-input-placeholder {
+        color: #e2dedb;
+        font-size: 0.875em;
+      }
+
+      input:hover:focus::-webkit-input-placeholder,
+      textarea:hover:focus::-webkit-input-placeholder {
+        color: #cbc6c1;
+      }
+      input:hover::-moz-placeholder,
+      textarea:hover::-moz-placeholder {
+        color: #e2dedb;
+        font-size: 0.875em;
+      }
+
+      input:hover:focus::-moz-placeholder,
+      textarea:hover:focus::-moz-placeholder {
+        color: #cbc6c1;
+      }
+
+      input:hover::placeholder,
+      textarea:hover::placeholder {
+        color: #e2dedb;
+        font-size: 0.875em;
+      }
+
+      input:hover:focus::placeholder,
+      textarea:hover:focus::placeholder {
+        color: #cbc6c1;
+      }
+
+      input:hover::placeholder,
+      textarea:hover::placeholder {
+        color: #e2dedb;
+        font-size: 0.875em;
+      }
+
+      input:hover:focus::-ms-placeholder,
+      textarea:hover::focus:-ms-placeholder {
+        color: #cbc6c1;
+      }
+
       #form {
         position: relative;
         width: 500px;
         margin: 50px auto 100px auto;
       }
 
-      @import url('https://fonts.googleapis.com/css?family=Josefin+Sans:400,600');
-
-      .filter {
-        font-family: 'Josefin Sans', sans-serif;
-        width: 317px;
-        height: 69px;
-        border-radius: 4px;
-        background-color: #ffffff;
-        box-shadow: 0 0 30px 0 rgba(199, 199, 199, 0.25);
-        position: relative;
-        display: flex;
-        align-items: center;
-        padding: 0 20px;
-        margin-bottom: 20px;
-      }
-
-      label {
-        font-size: 18px;
-        font-weight: bold;
-        color: rgba(33, 75, 93, 0.5);
-        position: absolute;
-        transition: 0.4s ease-in-out;
-        margin-top: 2px;
-      }
-
       input {
-        width: 200px;
-        margin-top: 30px;
-        border: none;
+        font-family: 'Lato', sans-serif;
+        font-size: 0.875em;
+        width: 470px;
+        height: 50px;
+        padding: 0px 15px 0px 15px;
+
+        background: transparent;
         outline: none;
-        font-size: 20px;
-        color: #214b5d;
-        transition: 0.4s linear;
-        border-bottom: 2px solid rgba(0, 0, 0, 0);
-        &:focus {
-          border-bottom: 2px solid rgba(0, 0, 0, 0.1);
-        }
-        &:focus + label {
-          font-size: 14px;
-          margin-top: -15px;
-        }
-        &:valid + label {
-          font-size: 14px;
-          margin-top: -15px;
-        }
+        color: #726659;
+
+        border: solid 1px #b3aca7;
+        border-bottom: none;
+
+        transition: all 0.3s ease-in-out;
+        -webkit-transition: all 0.3s ease-in-out;
+        -moz-transition: all 0.3s ease-in-out;
+        -ms-transition: all 0.3s ease-in-out;
       }
 
-      input[type='number'] {
-        appearance: textfield; /* Firefox */
-      }
-
-      #inputYears input {
-        width: 100%;
-      }
-
-      #forecastOption select {
-        width: 100%;
-        border: none;
-        margin-top: 10px;
-        font-size: 20px;
-        color: #fff;
-        outline: none;
-        padding-top: 20px;
-        &:focus {
-          color: #214b5d;
-        }
-        &:valid {
-          color: #214b5d;
-        }
-        &:focus + label {
-          font-size: 14px;
-          margin-top: -15px;
-        }
-        &:valid + label {
-          font-size: 14px;
-          margin-top: -15px;
-        }
-      }
-
-      .btn {
-        border: none;
-        display: block;
-        text-align: center;
-        cursor: pointer;
-        text-transform: uppercase;
-        outline: none;
-        overflow: hidden;
-        position: relative;
-        color: #fff;
-        font-weight: 700;
-        font-size: 15px;
-        background-color: #222;
-        padding: 17px 60px;
-        margin: 0 auto;
-        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-        border-radius: 4px;
-      }
-
-      .btn span {
-        position: relative;
-        z-index: 1;
-      }
-
-      .btn:after {
-        content: '';
-        position: absolute;
-        left: 0;
-        top: 0;
-        height: 490%;
-        width: 140%;
-        background: #4d43dd;
-        -webkit-transition: all 0.5s ease-in-out;
-        transition: all 0.5s ease-in-out;
-        -webkit-transform: translateX(-98%) translateY(-25%) rotate(45deg);
-        transform: translateX(-98%) translateY(-25%) rotate(45deg);
-      }
-
-      .btn:hover:after {
-        -webkit-transform: translateX(-9%) translateY(-25%) rotate(45deg);
-        transform: translateX(-9%) translateY(-25%) rotate(45deg);
+      input:hover {
+        background: #b3aca7;
+        color: #e2dedb;
       }
 
       textarea {
@@ -580,6 +577,29 @@
       .customFont:hover {
         text-shadow: 0 10px 10px rgba(0, 0, 0, 0.6);
       }
+
+      .resultContainer {
+        display: flex;
+        width: 80%;
+      }
+
+      /* table */
+      .tableScroll {
+        overflow-y: auto;
+        width: fit-content;
+        max-height: 500px;
+      }
+
+      .forecastedContainer {
+        margin-right: 10px;
+        text-align: center;
+      }
+
+      /* graph */
+      .graphContainer {
+        text-align: center;
+        width: 100%;
+      }
     </style>
   </head>
 
@@ -628,6 +648,7 @@
             </g>
           </svg>
           TomatoCare
+
           <!-- Tomato Modal -->
           <div class="container">
             <div id="tomato">
@@ -640,66 +661,134 @@
     </header>
 
     <!-- Section 0 -->
-    <section class="blue">
-      <h1 class="customFont">Forecasting Page</h1>
-      <form method="POST" action="/forecasting">
-        <div class="filter" id="inputYears">
-          <input
-            type="number"
-            id="num_years"
-            name="num_years"
-            min="1"
-            max="13"
-            required
-          />
-          <label for="num_years">INPUT YEARS OF FORECASTING</label>
-        </div>
-        <div class="filter" id="forecastOption">
-          <select name="selected_option" id="selected_option">
-            <option value="AreaHarvested">Area Harvested</option>
-            <option value="FarmgatePrices">Farmgate Prices</option>
-            <option value="VolumeDemand">Volume Demand</option>
-            <option value="VolumeProduction">Volume Production</option>
-          </select>
-          <label value="">SELECT FORECAST OPTION</label>
-        </div>
-        <div class="button_container">
-          <button type="submit" class="btn">
-            <span>Forecast</span>
-          </button>
-        </div>
-        <div class="spacer"></div>
-      </form>
+    <section class="orange">
+      <h1 class="customFont">Forecasting Results</h1>
+    </section>
 
-      {% if prediction_df %}
-      <h2>Forecasted Data</h2>
-      <table>
-        <tr>
-          <th>Year</th>
-          <th>Actual</th>
-          <th>Forecast</th>
-        </tr>
-        {% for _, row in prediction_df.iterrows() %}
-        <tr>
-          <td>{{ row['Year'] }}</td>
-          <td>{{ row['Actual'] }}</td>
-          <td>{{ row['Forecast'] }}</td>
-        </tr>
-        {% endfor %}
-      </table>
+    <div class="spacer layer1"></div>
+
+    <!-- Section 5 -->
+    <section>
+      <h2>
+        Here are the forecasted results of future Volume Production in the
+        future year-quarter (in hectares):
+      </h2>
+      <div class="resultContainer">
+        <div class="forecastedContainer">
+          <!-- Display the forecasted data here -->
+          {% if prediction_df %}
+
+          <div class="tableScroll">
+            <table>
+              <thead>
+                <tr>
+                  <th>Year</th>
+                  <th>Time Period</th>
+                  <th>Forecast</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for row in prediction_df %}
+                <tr>
+                  <td>{{ row['Year'] }}</td>
+                  <td>{{ row['TimePeriod'] }}</td>
+                  <td>{{ row['Forecast'] }}</td>
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="graphContainer">
+          <p>Graphical representation</p>
+          <div id="plot">
+            <script>
+              // Convert the Flask template variable to a JavaScript variable
+              var forecastData = JSON.parse(
+                '{{ prediction_df | tojson | safe }}',
+              );
+              // Extract the years and forecasts
+              var years = forecastData.map(function (row) {
+                return row.Year + '- Quarter' + row.TimePeriod;
+              });
+              var forecasts = forecastData.map(function (row) {
+                return row.Forecast;
+              });
+
+              // Create the trace for the forecasted data
+              var trace = {
+                x: years,
+                y: forecasts,
+                type: 'scatter',
+                mode: 'lines',
+                name: 'Forecast',
+              };
+
+              // Create the layout for the plot
+              var layout = {
+                title: 'Actual vs Forecasted Future Data',
+                xaxis: {
+                  tickangle: -90,
+                },
+                yaxis: {
+                  title: 'Volume Production',
+                },
+              };
+
+              // Create the data array
+              var data = [trace];
+
+              // Create configRes for the plot Responsiveness
+              var configRes = { responsive: true };
+
+              // Plot the data
+              Plotly.newPlot('plot', data, layout, configRes);
+            </script>
+
+            {% else %}
+            <p>No forecasted data available.</p>
+            {% endif %}
+          </div>
+        </div>
+      </div>
     </section>
 
     <div class="spacer layer2 flip"></div>
 
     <!-- Section 1 -->
     <section class="pink">
-      <div class="blob-content">
-        <h1 class="customFont">What-if Analysis</h1>
+      <div class="blob-content" style="text-align: center">
+        <h2>Textual representation:</h2>
         <p>
-          What-if Analysis is the main feature of the TomatoCare web
-          application, where users can make forecasts about future supply and
-          demand of tomatoes.
+          The Volume Production forecast presents that the future Volume
+          Production in Nueva Vizcaya in the next {{ number }} years:
         </p>
+
+        <h2>Percentage Change:</h2>
+        <ul>
+          {% for change in formatted_changes %}
+          <p>{{ change }}</p>
+          {% endfor %}
+        </ul>
+        <!-- Display the average percent change -->
+        <p>Average Percent Change: {{ average_percent_change }}%</p>
+        <!-- Conditionally display output based on the sign of the average percent change -->
+        {% if average_percent_change > 0 %}
+        <p>
+          The average percent change is positive: It implies a rise in the
+          prices at which farmers sell their tomatoes directly at the farmgate.
+          This can suggest increased demand or limited supply in the market,
+          potentially leading to higher profitability for tomato farmers.
+        </p>
+        {% elif average_percent_change < 0 %}
+        <p>
+          It implies a decline in farmgate prices, which may be due to factors
+          such as oversupply, decreased demand, or market competition. It can
+          indicate challenges in profitability for tomato farmers and may
+          require adjustments in marketing strategies or cost management.
+        </p>
+        {% endif %}
       </div>
 
       <svg
@@ -748,6 +837,5 @@
       <h1 class="customFont">Thank you!</h1>
       <p>Presented by return to_sleep</p>
     </section>
-    {% endif %}
   </body>
 </html>

@@ -224,7 +224,7 @@ def forecasting():
 
             # Render the forecasting_results.html template with the predicted data
             return render_template(
-                "forecasting_volumeResult.html",
+                "forecasting_volumeProductionResult.html",
                 prediction_df=prediction_df.to_dict(orient="records"),
                 number=number,
                 formatted_changes=formatted_changes,
@@ -313,7 +313,7 @@ def forecasting():
 
             # Render the forecasting_results.html template with the predicted data
             return render_template(
-                "forecasting_pricesResult.html",
+                "forecasting_farmgateResult.html",
                 prediction_df=prediction_df.to_dict(orient="records"),
                 number=number,
                 formatted_changes=formatted_changes,

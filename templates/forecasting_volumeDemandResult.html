@@ -1,100 +1,125 @@
 <!DOCTYPE html>
 <html lang="en">
+  <!-- head -->
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TomatoCare</title>
 
-<!-- head -->
-<head>
-<meta charset="UTF-8" />
-<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title> TomatoCare </title>
+    <!--Links-->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="icon"
+      type="image/png"
+      href="/static/images/TomatoCareLogo.png"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Prompt:wght@100;400;900&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=EB+Garamond&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />
+    <link
+      href="https://material.google.com/components/text-fields.html"
+      target="_blank"
+    />
+    <link
+      href="https://fonts.googleapis.com/css?family=Lato:100,300,400"
+      rel="stylesheet"
+    />
 
-<!--Links-->
-<link rel="preconnect" href="https://fonts.googleapis.com" />
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link rel="icon" type="image/png" href="/static/images/TomatoCareLogo.png">
-<link href="https://fonts.googleapis.com/css2?family=Prompt:wght@100;400;900&display=swap" rel="stylesheet" />
-<link href="https://fonts.googleapis.com/css2?family=EB+Garamond&display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-<link href="https://material.google.com/components/text-fields.html" target="_blank">
-<link href="https://fonts.googleapis.com/css?family=Lato:100,300,400" rel="stylesheet">
+    <!--Scripts-->
+    <script src="https://cdn.jsdelivr.net/npm/kute.js@2.1.2/dist/kute.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script
+      src="https://static.elfsight.com/platform/platform.js"
+      data-use-service-core
+      defer
+    ></script>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
 
-<!--Scripts-->
-<script src="https://cdn.jsdelivr.net/npm/kute.js@2.1.2/dist/kute.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-<!-- <script src ="https://code.jquery.com/jquery-3.7.0.min.js"></script> -->
-<script src="https://static.elfsight.com/platform/platform.js" data-use-service-core defer></script>
-<script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <!-- style -->
+    <style>
+      /* Main Structure */
+      html {
+        scroll-snap-type: y mandatory;
+      }
 
-<!-- style -->
-<style>
+      body {
+        width: 100%;
+        height: 100%;
+        margin: 0;
+        padding: 0;
+        font-family: 'Prompt', sans-serif;
+        color: white;
+        background: #202731;
+        overflow-x: hidden;
+      }
 
-  /* Main Structure */
-  html {
-    scroll-snap-type: y mandatory;
-  }
-
-  body {
-    width: 100%;
-    height: 100%;
-    margin: 0;
-    padding: 0;
-    font-family: 'Prompt', sans-serif;
-    color: white;
-    background: #202731;
-    overflow-x: hidden;
-  }
-
-  body::-webkit-scrollbar {
+      body::-webkit-scrollbar {
         width: 0.5em; /* Set the width of the scrollbar */
-    }
+      }
 
-  body::-webkit-scrollbar-track {
+      body::-webkit-scrollbar-track {
         background-color: transparent; /* Set the background color of the scrollbar track */
-    }
+      }
 
-  body::-webkit-scrollbar-thumb {
+      body::-webkit-scrollbar-thumb {
         background-color: transparent; /* Set the color of the scrollbar thumb */
-    }
+      }
 
-  body::-webkit-scrollbar-thumb:hover {
-        background-color: rgba(0, 0, 0, 0.2); /* Set the color of the scrollbar thumb on hover */
-    }
+      body::-webkit-scrollbar-thumb:hover {
+        background-color: rgba(
+          0,
+          0,
+          0,
+          0.2
+        ); /* Set the color of the scrollbar thumb on hover */
+      }
 
-  /* Logo */
-  svg.logo{
+      /* Logo */
+      svg.logo {
         display: flex;
         justify-content: center;
         align-items: center;
         height: 100px;
         width: 100px;
         margin-bottom: 20px;
-        position:absolute;
-        left:0;
-        top:0;
+        position: absolute;
+        left: 0;
+        top: 0;
         scroll-snap-align: start;
-  }
+      }
 
-  h1 {
-        margin:0.5em;
-        position:relative;
+      .pomotodoro {
+        margin: 0.5em;
+        position: relative;
         padding-left: 120px; /* Increase the padding to accommodate the logo */
         font-family: 'EB Garamond', 'serif';
-        text-shadow:0 10px 10px rgba(0, 0, 0, 0.2);
-        font-size:4rem;
+        text-shadow: 0 10px 10px rgba(0, 0, 0, 0.2);
+        font-size: 4rem;
         transition: all 1s ease-in-out;
-  }
+      }
 
-  h1:hover {
+      .pomotodoro:hover {
         text-shadow: 0 10px 10px rgba(0, 0, 0, 0.6);
         color: rgb(255, 0, 0);
-  }
+      }
 
-  .red-shadow {
+      .red-shadow {
         filter: drop-shadow(0 10px 10px rgba(190, 32, 46, 0.5));
-  }
+      }
 
-  /* Tomato Profile Modal */
-  #tomato {
+      /* Tomato Profile Modal */
+      #tomato {
         background: tomato;
         height: 50px;
         width: 100px;
@@ -104,14 +129,14 @@
         right: 0;
         transition: all 0.3s ease-in-out;
         cursor: pointer;
-  }
+      }
 
-  #tomato:hover {
+      #tomato:hover {
         transform: scale(1.2);
-  }
+      }
 
-  #tomato::before {
-        content: "";
+      #tomato::before {
+        content: '';
         width: 32px;
         height: 32px;
         border: 1px solid tomato;
@@ -121,10 +146,10 @@
         top: -32px;
         right: 0;
         transition: all 0.2s ease-in-out;
-  }
+      }
 
-  #tomato::after {
-        content: "";
+      #tomato::after {
+        content: '';
         width: 32px;
         height: 32px;
         border: 1px solid tomato;
@@ -133,9 +158,9 @@
         border-radius: 32px 0 0 0;
         top: -32px;
         transition: all 0.2s ease-in-out;
-  }
+      }
 
-  #tomatoFill {
+      #tomatoFill {
         width: 36px;
         height: 16px;
         background: tomato;
@@ -143,10 +168,10 @@
         top: -16px;
         left: 32px;
         transition: all 0.2s ease-in-out;
-  }
+      }
 
-  #tomatoFill::before {
-        content: "";
+      #tomatoFill::before {
+        content: '';
         width: 18px;
         height: 16px;
         background: tomato;
@@ -154,10 +179,10 @@
         border-radius: 0 16px 0 0;
         top: -16px;
         transition: all 0.2s ease-in-out;
-  }
+      }
 
-  #tomatoFill::after {
-        content: "";
+      #tomatoFill::after {
+        content: '';
         width: 18px;
         height: 16px;
         background: tomato;
@@ -166,10 +191,10 @@
         top: -16px;
         right: 0;
         transition: all 0.2s ease-in-out;
-  }
+      }
 
-  #tomatoTop {
-        background: #A8B848;
+      #tomatoTop {
+        background: #a8b848;
         height: 16px;
         width: 16px;
         border-radius: 16px 0 16px 0;
@@ -179,11 +204,11 @@
         z-index: 1;
         left: calc(32px + 18px / 2);
         transition: all 0.2s ease-in-out;
-  }
+      }
 
-  #tomatoTop::before {
-        content: "";
-        background: #A8B848;
+      #tomatoTop::before {
+        content: '';
+        background: #a8b848;
         height: 16px;
         width: 16px;
         border-radius: 16px 0 16px 0;
@@ -192,11 +217,11 @@
         transform: rotateZ(90deg);
         top: 12px;
         transition: all 0.2s ease-in-out;
-  }
+      }
 
-  #tomatoTop::after {
-        content: "";
-        background: #A8B848;
+      #tomatoTop::after {
+        content: '';
+        background: #a8b848;
         height: 16px;
         width: 16px;
         border-radius: 16px 0 16px 0;
@@ -206,42 +231,45 @@
         top: -2px;
         right: 13px;
         transition: all 0.2s ease-in-out;
-  }
-
-  /* Background */
-
-  section {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    min-height: 400px;
-    padding-top: 100px;
-    scroll-snap-align: start;
-    justify-content: center;
-  }
-
-  .blue {
-        background: #3c31dd;
       }
 
-  .red {
+      /* Background */
+
+      section {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        min-height: 400px;
+        padding-top: 100px;
+        scroll-snap-align: start;
+        justify-content: center;
+      }
+
+      .orange {
         background: #dd3f31;
       }
 
-  .pink {
+      .blue {
+        background: #3c31dd;
+      }
+
+      .red {
+        background: #dd3f31;
+      }
+
+      .pink {
         background: #ff0066;
         overflow: hidden;
       }
 
-  .dark {
+      .dark {
         background: #0f0f10;
       }
 
-      
-  /* Curved bg with plain CSS */
+      /* Curved bg with plain CSS */
 
-  .curve {
+      .curve {
         position: relative;
         height: 250px;
         width: 100%;
@@ -249,7 +277,7 @@
         text-align: center;
       }
 
-  .curve::before {
+      .curve::before {
         content: '';
         display: block;
         position: absolute;
@@ -260,7 +288,7 @@
         background-color: hsl(216, 21%, 16%);
       }
 
-  .curve::after {
+      .curve::after {
         content: '';
         display: block;
         position: absolute;
@@ -272,9 +300,9 @@
         z-index: -1;
       }
 
-  /* Bubble bg with plain CSS */
+      /* Bubble bg with plain CSS */
 
-  .bubble::after {
+      .bubble::after {
         content: '';
         border-top-left-radius: 50% 100%;
         border-top-right-radius: 50% 100%;
@@ -286,9 +314,9 @@
         height: 85%;
       }
 
-  /* Curved bg with SVG via https://www.shapedivider.app/ */
+      /* Curved bg with SVG via https://www.shapedivider.app/ */
 
-  .wave {
+      .wave {
         position: absolute;
         top: 0;
         left: 0;
@@ -297,20 +325,20 @@
         line-height: 0;
       }
 
-  .wave svg {
+      .wave svg {
         position: relative;
         display: block;
         width: calc(103% + 1.3px);
         height: 262px;
       }
 
-  .wave .shape-fill {
+      .wave .shape-fill {
         fill: hsl(240, 3%, 6%);
       }
 
-  /* SVG background image via https://haikei.app/ */
+      /* SVG background image via https://haikei.app/ */
 
-  .spacer {
+      .spacer {
         aspect-ratio: 960/300;
         width: 100%;
         background-repeat: no-repeat;
@@ -318,394 +346,499 @@
         background-size: cover;
       }
 
-  .layer1 {
+      .layer1 {
         background-image: url('./static/layer1.svg');
       }
-  .layer2 {
+      .layer2 {
         background-image: url('./static/layer2.svg');
       }
 
-  .flip {
+      .flip {
         transform: rotate(180deg);
       }
 
-  /* Blobs SVG background image via https://haikei.app/ */
+      /* Blobs SVG background image via https://haikei.app/ */
 
-  .blob-motion {
+      .blob-motion {
         position: absolute;
         transform: translateY(-20%);
         z-index: 0;
       }
 
-  .blob-content {
+      .blob-content {
         z-index: 1;
+        width: 100%;
+        max-width: 80%;
       }
 
-  .blobs {
+      .blobs {
         width: 100%;
         background: url('./static/blobs.svg') no-repeat bottom / cover;
       }
 
-  .container {
-    position: relative;
-    display: flex;
-    align-items: flex-start;
-  }
-  
-  /* Contact */
-  input::-webkit-input-placeholder, textarea::-webkit-input-placeholder {
-  color: #aca49c;
-  font-size: 0.875em;
-  }
+      .container {
+        position: relative;
+        display: flex;
+        align-items: flex-start;
+      }
 
-  input:focus::-webkit-input-placeholder, textarea:focus::-webkit-input-placeholder {
-  color: #bbb5af;
-  }
+      /* Contact */
+      input::-webkit-input-placeholder,
+      textarea::-webkit-input-placeholder {
+        color: #aca49c;
+        font-size: 0.875em;
+      }
 
-  input::-moz-placeholder, textarea::-moz-placeholder {
-  color: #aca49c;
-  font-size: 0.875em;
-  }
+      input:focus::-webkit-input-placeholder,
+      textarea:focus::-webkit-input-placeholder {
+        color: #bbb5af;
+      }
 
-  input:focus::-moz-placeholder, textarea:focus::-moz-placeholder {
-  color: #bbb5af;
-  }
+      input::-moz-placeholder,
+      textarea::-moz-placeholder {
+        color: #aca49c;
+        font-size: 0.875em;
+      }
 
-  input::placeholder, textarea::placeholder {
-  color: #aca49c;
-  font-size: 0.875em;
-  }
+      input:focus::-moz-placeholder,
+      textarea:focus::-moz-placeholder {
+        color: #bbb5af;
+      }
 
-  input:focus::placeholder, textarea::focus:placeholder {
-  color: #bbb5af;
-  }
+      input::placeholder,
+      textarea::placeholder {
+        color: #aca49c;
+        font-size: 0.875em;
+      }
 
-  input::-ms-placeholder, textarea::-ms-placeholder {
-  color: #aca49c;
-  font-size: 0.875em;
-  }
+      input:focus::placeholder,
+      textarea::focus:placeholder {
+        color: #bbb5af;
+      }
 
-  input:focus::-ms-placeholder, textarea:focus::-ms-placeholder {
-  color: #bbb5af;
-  }
+      input::-ms-placeholder,
+      textarea::-ms-placeholder {
+        color: #aca49c;
+        font-size: 0.875em;
+      }
 
-  input:hover::-webkit-input-placeholder, textarea:hover::-webkit-input-placeholder {
-  color: #e2dedb;
-  font-size: 0.875em;
-  }
+      input:focus::-ms-placeholder,
+      textarea:focus::-ms-placeholder {
+        color: #bbb5af;
+      }
 
-  input:hover:focus::-webkit-input-placeholder, textarea:hover:focus::-webkit-input-placeholder {
-  color: #cbc6c1;
-  }
-  input:hover::-moz-placeholder, textarea:hover::-moz-placeholder {
-  color: #e2dedb;
-  font-size: 0.875em;
-  }
+      input:hover::-webkit-input-placeholder,
+      textarea:hover::-webkit-input-placeholder {
+        color: #e2dedb;
+        font-size: 0.875em;
+      }
 
-  input:hover:focus::-moz-placeholder, textarea:hover:focus::-moz-placeholder {
-  color: #cbc6c1;
-  }
+      input:hover:focus::-webkit-input-placeholder,
+      textarea:hover:focus::-webkit-input-placeholder {
+        color: #cbc6c1;
+      }
+      input:hover::-moz-placeholder,
+      textarea:hover::-moz-placeholder {
+        color: #e2dedb;
+        font-size: 0.875em;
+      }
 
-  input:hover::placeholder, textarea:hover::placeholder {
-  color: #e2dedb;
-  font-size: 0.875em;
-  }
+      input:hover:focus::-moz-placeholder,
+      textarea:hover:focus::-moz-placeholder {
+        color: #cbc6c1;
+      }
 
-  input:hover:focus::placeholder, textarea:hover:focus::placeholder {
-  color: #cbc6c1;
-  }
+      input:hover::placeholder,
+      textarea:hover::placeholder {
+        color: #e2dedb;
+        font-size: 0.875em;
+      }
 
-  input:hover::placeholder, textarea:hover::placeholder {
-  color: #e2dedb;
-  font-size: 0.875em;
-  }
+      input:hover:focus::placeholder,
+      textarea:hover:focus::placeholder {
+        color: #cbc6c1;
+      }
 
-  input:hover:focus::-ms-placeholder, textarea:hover::focus:-ms-placeholder {
-  color: #cbc6c1;
-  }
+      input:hover::placeholder,
+      textarea:hover::placeholder {
+        color: #e2dedb;
+        font-size: 0.875em;
+      }
 
-  #form {
-  position: relative;
-  width: 500px;
-  margin: 50px auto 100px auto;
-}
+      input:hover:focus::-ms-placeholder,
+      textarea:hover::focus:-ms-placeholder {
+        color: #cbc6c1;
+      }
 
-input {
-  font-family: 'Lato', sans-serif;
-  font-size: 0.875em;
-  width: 470px;
-  height: 50px;
-  padding: 0px 15px 0px 15px;
-  
-  background: transparent;
-  outline: none;
-  color: #726659;
-  
-  border: solid 1px #b3aca7;
-  border-bottom: none;
-  
-  transition: all 0.3s ease-in-out;
-  -webkit-transition: all 0.3s ease-in-out;
-  -moz-transition: all 0.3s ease-in-out;
-  -ms-transition: all 0.3s ease-in-out;
-}
+      #form {
+        position: relative;
+        width: 500px;
+        margin: 50px auto 100px auto;
+      }
 
-input:hover {
-  background: #b3aca7;
-  color: #e2dedb;
-}
+      input {
+        font-family: 'Lato', sans-serif;
+        font-size: 0.875em;
+        width: 470px;
+        height: 50px;
+        padding: 0px 15px 0px 15px;
 
-textarea {
-  width: 470px;
-  max-width: 470px;
-  height: 110px;
-  max-height: 110px;
-  padding: 15px;
-  
-  background: transparent;
-  outline: none;
-  
-  color: #726659;
-  font-family: 'Lato', sans-serif;
-  font-size: 0.875em;
-  
-  border: solid 1px #b3aca7;
-  
-  transition: all 0.3s ease-in-out;
-  -webkit-transition: all 0.3s ease-in-out;
-  -moz-transition: all 0.3s ease-in-out;
-  -ms-transition: all 0.3s ease-in-out;
-}
+        background: transparent;
+        outline: none;
+        color: #726659;
 
-textarea:hover {
-  background: #b3aca7;
-  color: #e2dedb;
-}
+        border: solid 1px #b3aca7;
+        border-bottom: none;
 
-#submit {
-  width: 502px;
-  
-  padding: 0;
-  margin: -5px 0px 0px 0px;
-  
-  font-family: 'Lato', sans-serif;
-  font-size: 0.875em;
-  color: #b3aca7;
-  
-  outline:none;
-  cursor: pointer;
-  
-  border: solid 1px #b3aca7;
-  border-top: none;
-}
+        transition: all 0.3s ease-in-out;
+        -webkit-transition: all 0.3s ease-in-out;
+        -moz-transition: all 0.3s ease-in-out;
+        -ms-transition: all 0.3s ease-in-out;
+      }
 
-#submit:hover {
-  color: #e2dedb;
-}
+      input:hover {
+        background: #b3aca7;
+        color: #e2dedb;
+      }
 
-.iframeContainer{
-            position: relative;
-            width: 1300px;
-            height: 500px;
-            overflow: hidden;
-}    
+      textarea {
+        width: 470px;
+        max-width: 470px;
+        height: 110px;
+        max-height: 110px;
+        padding: 15px;
 
-.iframeContent{
-            position: absolute;
-            top: -140px;
-            left: -180px;
-            width: 1500px;
-            height: 2000px;
-            margin: 10px;
-}
+        background: transparent;
+        outline: none;
 
+        color: #726659;
+        font-family: 'Lato', sans-serif;
+        font-size: 0.875em;
 
-</style>
-</head>
+        border: solid 1px #b3aca7;
 
-<!-- Body -->
-<body>
+        transition: all 0.3s ease-in-out;
+        -webkit-transition: all 0.3s ease-in-out;
+        -moz-transition: all 0.3s ease-in-out;
+        -ms-transition: all 0.3s ease-in-out;
+      }
+
+      textarea:hover {
+        background: #b3aca7;
+        color: #e2dedb;
+      }
+
+      #submit {
+        width: 502px;
+
+        padding: 0;
+        margin: -5px 0px 0px 0px;
+
+        font-family: 'Lato', sans-serif;
+        font-size: 0.875em;
+        color: #b3aca7;
+
+        outline: none;
+        cursor: pointer;
+
+        border: solid 1px #b3aca7;
+        border-top: none;
+      }
+
+      #submit:hover {
+        color: #e2dedb;
+      }
+
+      .iframeContainer {
+        position: relative;
+        width: 1300px;
+        height: 500px;
+        overflow: hidden;
+      }
+
+      .iframeContent {
+        position: absolute;
+        top: -140px;
+        left: -180px;
+        width: 1500px;
+        height: 2000px;
+        margin: 10px;
+      }
+
+      .customFont {
+        margin: 0.5em;
+        position: relative;
+        font-family: 'EB Garamond', 'serif';
+        text-shadow: 0 10px 10px rgba(0, 0, 0, 0.2);
+        font-size: 4rem;
+        transition: all 1s ease-in-out;
+      }
+
+      .customFont:hover {
+        text-shadow: 0 10px 10px rgba(0, 0, 0, 0.6);
+      }
+
+      .resultContainer {
+        display: flex;
+        width: 80%;
+      }
+
+      /* table */
+      .tableScroll {
+        overflow-y: auto;
+        width: fit-content;
+        max-height: 500px;
+      }
+
+      .forecastedContainer {
+        margin-right: 10px;
+        text-align: center;
+      }
+
+      /* graph */
+      .graphContainer {
+        text-align: center;
+        width: 100%;
+      }
+    </style>
+  </head>
+
+  <!-- Body -->
+  <body>
     <header>
       <!-- Logo -->
       <div>
-      <h1 class="pomotodoro">
-        <svg class="logo z-depth-3" width="100px" height="100px" viewBox="0 0 94 94">
-          <g transform="translate(20)">
-              <path d="m58.982 34.35c0 16.287-13.2 29.489-29.491 29.489-16.289.0001-29.491-13.201-29.491-29.489 0-16.292 13.202-17.909 29.491-17.909 16.291 0 29.491 1.617 29.491 17.909" fill="#be202e" class="red-shadow"></path>
-              <path d="m27.752 31.969c-.396.461-.785.952-1.191 1.511-.738 1.036-2.433 1.6-3.4.439-1.822-2.196-2.935-4.24-3.87-6.702-3.02.482-5.905.872-9.04.838-1.541-.017-2.835-1.866-1.871-3.264 1.798-2.603 3.76-4.807 5.935-7.118.083-.084.171-.11.256-.177-8.709 1.692-14.57 6.02-14.57 16.859 0 16.287 13.202 29.489 29.491 29.489 6.611 0 12.692-2.201 17.609-5.874-8.888-6.079-15.757-16.366-19.348-26" fill="#9b1f2e"></path>
+        <h1 class="pomotodoro">
+          <svg
+            class="logo z-depth-3"
+            width="100px"
+            height="100px"
+            viewBox="0 0 94 94"
+          >
+            <g transform="translate(20)">
+              <path
+                d="m58.982 34.35c0 16.287-13.2 29.489-29.491 29.489-16.289.0001-29.491-13.201-29.491-29.489 0-16.292 13.202-17.909 29.491-17.909 16.291 0 29.491 1.617 29.491 17.909"
+                fill="#be202e"
+                class="red-shadow"
+              ></path>
+              <path
+                d="m27.752 31.969c-.396.461-.785.952-1.191 1.511-.738 1.036-2.433 1.6-3.4.439-1.822-2.196-2.935-4.24-3.87-6.702-3.02.482-5.905.872-9.04.838-1.541-.017-2.835-1.866-1.871-3.264 1.798-2.603 3.76-4.807 5.935-7.118.083-.084.171-.11.256-.177-8.709 1.692-14.57 6.02-14.57 16.859 0 16.287 13.202 29.489 29.491 29.489 6.611 0 12.692-2.201 17.609-5.874-8.888-6.079-15.757-16.366-19.348-26"
+                fill="#9b1f2e"
+              ></path>
               <g fill="#04a69c">
-              <path d="m38.803 14.838c3.4-.482 9.578 8.196 9.919 10.587.338 2.388-6.669.64-10.634.158-4.088-.497-8.246-.784-8.584-3.171-.338-2.386 5.911-7.091 9.299-7.574"></path>
-              <path d="m18.898 14.838c-3.394-.482-9.572 8.196-9.913 10.587-.338 2.388 6.663.64 10.636.158 4.085-.497 8.243-.784 8.581-3.171.34-2.386-5.91-7.091-9.304-7.574"></path>
+                <path
+                  d="m38.803 14.838c3.4-.482 9.578 8.196 9.919 10.587.338 2.388-6.669.64-10.634.158-4.088-.497-8.246-.784-8.584-3.171-.338-2.386 5.911-7.091 9.299-7.574"
+                ></path>
+                <path
+                  d="m18.898 14.838c-3.394-.482-9.572 8.196-9.913 10.587-.338 2.388 6.663.64 10.636.158 4.085-.497 8.243-.784 8.581-3.171.34-2.386-5.91-7.091-9.304-7.574"
+                ></path>
               </g>
-              <path d="m22.719 21.875c-1.866 1.663.199 9.226 1.401 10.546 1.206 1.32 3.489-3.406 5.073-5.848 1.629-2.514 3.415-4.969 2.209-6.289-1.206-1.324-6.825-.072-8.683 1.591" fill="#2bb573"></path>
-              <path d="m28.336 11.644c1.449-2.035 9.193-.812 10.636.241 1.445 1.054-3.01 3.842-5.26 5.679-2.318 1.9-4.559 3.939-6.01 2.886-1.443-1.054-.817-6.775.632-8.806" fill="#038d80"></path>
-              <path d="m29.16.828c.23.173.192 1.942.125 2.09-1.733 3.753.778 13.333 1.202 14.67.979 3.102.19 6.8-1.398 6.546-1.53-.246-4.371-6.445-4.989-7.667-1.511-3-2.302-6.897-2.094-10.257.212-3.541 3.532-8.103 7.154-5.382" fill="#2bb573"></path>
-          </g>
-      </svg>
-        TomatoCare
+              <path
+                d="m22.719 21.875c-1.866 1.663.199 9.226 1.401 10.546 1.206 1.32 3.489-3.406 5.073-5.848 1.629-2.514 3.415-4.969 2.209-6.289-1.206-1.324-6.825-.072-8.683 1.591"
+                fill="#2bb573"
+              ></path>
+              <path
+                d="m28.336 11.644c1.449-2.035 9.193-.812 10.636.241 1.445 1.054-3.01 3.842-5.26 5.679-2.318 1.9-4.559 3.939-6.01 2.886-1.443-1.054-.817-6.775.632-8.806"
+                fill="#038d80"
+              ></path>
+              <path
+                d="m29.16.828c.23.173.192 1.942.125 2.09-1.733 3.753.778 13.333 1.202 14.67.979 3.102.19 6.8-1.398 6.546-1.53-.246-4.371-6.445-4.989-7.667-1.511-3-2.302-6.897-2.094-10.257.212-3.541 3.532-8.103 7.154-5.382"
+                fill="#2bb573"
+              ></path>
+            </g>
+          </svg>
+          TomatoCare
 
-        <!-- Tomato Modal -->
-      <div class="container">
-        <div id="tomato">
-          <div id="tomatoTop"></div>
-          <div id="tomatoFill"></div>
-        </div>
-      </div>
-      </h1>
+          <!-- Tomato Modal -->
+          <div class="container">
+            <div id="tomato">
+              <div id="tomatoTop"></div>
+              <div id="tomatoFill"></div>
+            </div>
+          </div>
+        </h1>
       </div>
     </header>
 
-      <!-- Section 0 -->
-      <section class="blue">
-        <h1>Forecasting Results</h1>
-      </section>
-      
+    <!-- Section 0 -->
+    <section class="orange">
+      <h1 class="customFont">Forecasting Results</h1>
+    </section>
 
-      <div class="spacer layer1"></div>
+    <div class="spacer layer1"></div>
 
-      <!-- Section 5 -->
-      <section>
-        <h2>Here are the forecasted results of future Volume Demand in the future year-quarter (in hectares):</h2>
-
-        <p>
+    <!-- Section 5 -->
+    <section>
+      <h2>
+        Here are the forecasted results of future Volume Demand in the future
+        year-quarter (in hectares):
+      </h2>
+      <div class="resultContainer">
+        <div class="forecastedContainer">
           <!-- Display the forecasted data here -->
-        {% if prediction_df %}
-        <table>
-            <tr>
-                <th>Year</th>
-                <th>TimePeriod</th>
-                <!-- <th>Actual</th> -->
-                <th>Forecast</th>
-            </tr>
-            {% for row in prediction_df %}
+          {% if prediction_df %}
+
+          <div class="tableScroll">
+            <table>
+              <thead>
                 <tr>
-                    <td>{{ row['Year'] }}</td>
-                    <td>{{ row['TimePeriod'] }}</td>
-                    <!-- <td>{{ row['Actual'] }}</td> -->
-                    <td>{{ row['Forecast'] }}</td>
+                  <th>Year</th>
+                  <th>Time Period</th>
+                  <th>Forecast</th>
                 </tr>
-            {% endfor %}
-        </table>
+              </thead>
+              <tbody>
+                {% for row in prediction_df %}
+                <tr>
+                  <td>{{ row['Year'] }}</td>
+                  <td>{{ row['TimePeriod'] }}</td>
+                  <td>{{ row['Forecast'] }}</td>
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="graphContainer">
+          <p>Graphical representation</p>
+          <div id="plot">
+            <script>
+              // Convert the Flask template variable to a JavaScript variable
+              var forecastData = JSON.parse(
+                '{{ prediction_df | tojson | safe }}',
+              );
+              // Extract the years and forecasts
+              var years = forecastData.map(function (row) {
+                return row.Year + '- Quarter' + row.TimePeriod;
+              });
+              var forecasts = forecastData.map(function (row) {
+                return row.Forecast;
+              });
+
+              // Create the trace for the forecasted data
+              var trace = {
+                x: years,
+                y: forecasts,
+                type: 'scatter',
+                mode: 'lines',
+                name: 'Forecast',
+              };
+
+              // Create the layout for the plot
+              var layout = {
+                title: 'Actual vs Forecasted Future Data',
+                xaxis: {
+                  tickangle: -90,
+                },
+                yaxis: {
+                  title: 'Volume Demand',
+                },
+              };
+
+              // Create the data array
+              var data = [trace];
+
+              // Create configRes for the plot Responsiveness
+              var configRes = { responsive: true };
+
+              // Plot the data
+              Plotly.newPlot('plot', data, layout, configRes);
+            </script>
+
+            {% else %}
+            <p>No forecasted data available.</p>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="spacer layer2 flip"></div>
+
+    <!-- Section 1 -->
+    <section class="pink">
+      <div class="blob-content" style="text-align: center">
         <h2>Textual representation:</h2>
         <p>
-            The Volume Demand forecast presents that the future Volume Demand in Nueva Vizcaya in the next {{ number }} years:
-            <h2>Percentage Change:</h2>
-            <ul>
-              {% for change in formatted_changes %}
-                <p>{{ change }}</p>
-              {% endfor %}
-            </ul>           
-            <!-- Display the average percent change -->
-           <p>Average Percent Change: {{ average_percent_change }}%</p>
-           <!-- Conditionally display output based on the sign of the average percent change -->
-           {% if average_percent_change > 0 %}
-           <p>The average percent change is positive: It implies an expansion in the overall tomato production levels. This can suggest improved farming practices, increased efficiency, or larger cultivated areas. It may indicate the potential for higher sales volumes and revenue for tomato farmers.</p>
-           {% elif average_percent_change < 0 %}
-           <p>It implies a decrease in the overall production levels of tomatoes. This could be due to factors such as adverse weather conditions, pest and disease outbreaks, or other challenges in cultivation. It may require farmers to evaluate their production methods, implement risk management strategies, or explore alternative crops to maintain profitability.</p>
-           {% endif %}
+          The Volume Demand forecast presents that the future Volume Demand in
+          Nueva Vizcaya in the next {{ number }} years:
         </p>
+
+        <h2>Percentage Change:</h2>
+        <ul>
+          {% for change in formatted_changes %}
+          <p>{{ change }}</p>
+          {% endfor %}
+        </ul>
+        <!-- Display the average percent change -->
+        <p>Average Percent Change: {{ average_percent_change }}%</p>
+        <!-- Conditionally display output based on the sign of the average percent change -->
+        {% if average_percent_change > 0 %}
+        <p>
+          The average percent change is positive: It implies an expansion in the
+          overall tomato production levels. This can suggest improved farming
+          practices, increased efficiency, or larger cultivated areas. It may
+          indicate the potential for higher sales volumes and revenue for tomato
+          farmers.
         </p>
-        
-      </section>
+        {% elif average_percent_change < 0 %}
+        <p>
+          It implies a decrease in the overall production levels of tomatoes.
+          This could be due to factors such as adverse weather conditions, pest
+          and disease outbreaks, or other challenges in cultivation. It may
+          require farmers to evaluate their production methods, implement risk
+          management strategies, or explore alternative crops to maintain
+          profitability.
+        </p>
+        {% endif %}
+      </div>
 
-
-      <div class="spacer layer2 flip"></div>
-
-        <!-- Section 1 -->    
-      <section class="pink">
-        
-
-        <div class="blob-content"> 
-            <p>
-                Graphical representation
-                <div id="plot"></div>
-                <script>
-                    // Convert the Flask template variable to a JavaScript variable
-                    var forecastData = JSON.parse('{{ prediction_df | tojson | safe }}');
-                    // Extract the years and forecasts
-                    var years = forecastData.map(function(row) {
-                        return row.Year + '- Quarter' + row.TimePeriod;
-                    });
-                    var forecasts = forecastData.map(function(row) {
-                        return row.Forecast;
-                    });
-            
-                    // Create the trace for the forecasted data
-                    var trace = {
-                        x: years,
-                        y: forecasts,
-                        type: 'scatter',
-                        mode: 'lines',
-                        name: 'Forecast'
-                    };
-            
-                    // Create the layout for the plot
-                    var layout = {
-                        title: 'Actual vs Forecasted Future Data',
-                        xaxis: {
-                            tickangle: -90
-                        },
-                        yaxis: {
-                            title: 'Volume Demand'
-                        }
-                    };
-            
-                    // Create the data array
-                    var data = [trace];
-            
-                    // Plot the data
-                    Plotly.newPlot('plot', data, layout);
-                </script>
-            
-                {% else %}
-                <p>No forecasted data available.</p>
-                {% endif %}
-            </p>
-        </div>
-  
-        <svg
-          class="blob-motion"
-          id="visual"
-          viewBox="0 0 960 540"
-          width="960"
-          height="540"
-          xmlns="http://www.w3.org/2000/svg"
-          xmlns:xlink="http://www.w3.org/1999/xlink"
-          version="1.1"
+      <svg
+        class="blob-motion"
+        id="visual"
+        viewBox="0 0 960 540"
+        width="960"
+        height="540"
+        xmlns="http://www.w3.org/2000/svg"
+        xmlns:xlink="http://www.w3.org/1999/xlink"
+        version="1.1"
+      >
+        <g transform="translate(450.7256843113689 283.4942824330989)">
+          <path
+            id="blob1"
+            d="M148.7 -134.9C193.7 -103.7 231.9 -51.9 232.4 0.6C233 53 196.1 106.1 151.1 128.6C106.1 151.1 53 143 -4.4 147.4C-61.8 151.8 -123.5 168.5 -151.2 146C-178.8 123.5 -172.4 61.8 -172.8 -0.4C-173.1 -62.5 -180.3 -124.9 -152.6 -156.1C-124.9 -187.3 -62.5 -187.1 -5.3 -181.8C51.9 -176.5 103.7 -166 148.7 -134.9"
+            fill="#BB004B"
+          ></path>
+        </g>
+        <g
+          transform="translate(509.54377535978017 281.49390864595887)"
+          style="visibility: hidden"
         >
-          <g transform="translate(450.7256843113689 283.4942824330989)">
-            <path
-              id="blob1"
-              d="M148.7 -134.9C193.7 -103.7 231.9 -51.9 232.4 0.6C233 53 196.1 106.1 151.1 128.6C106.1 151.1 53 143 -4.4 147.4C-61.8 151.8 -123.5 168.5 -151.2 146C-178.8 123.5 -172.4 61.8 -172.8 -0.4C-173.1 -62.5 -180.3 -124.9 -152.6 -156.1C-124.9 -187.3 -62.5 -187.1 -5.3 -181.8C51.9 -176.5 103.7 -166 148.7 -134.9"
-              fill="#BB004B"
-            ></path>
-          </g>
-          <g transform="translate(509.54377535978017 281.49390864595887)" style="visibility: hidden">
-            <path
-              id="blob2"
-              d="M115.4 -137.9C137.9 -92.9 136.4 -46.4 133.6 -2.8C130.8 40.8 126.6 81.6 104.1 118.4C81.6 155.2 40.8 188.1 -8.4 196.5C-57.5 204.8 -115 188.7 -151 151.9C-187 115 -201.5 57.5 -190.8 10.7C-180.1 -36.1 -144.1 -72.1 -108.1 -117.1C-72.1 -162.1 -36.1 -216.1 5.2 -221.2C46.4 -226.4 92.9 -182.9 115.4 -137.9"
-              fill="#BB004B"
-            ></path>
-          </g>
-        </svg>
-  
-        <script>
-          const tween = KUTE.fromTo(
-            '#blob1',
-            { path: '#blob1' },
-            { path: '#blob2' },
-            { repeat: 999, duration: 3000, yoyo: true }
-          ).start();
-        </script>
-      </section>
-  
-      <div class="spacer layer2"></div>
+          <path
+            id="blob2"
+            d="M115.4 -137.9C137.9 -92.9 136.4 -46.4 133.6 -2.8C130.8 40.8 126.6 81.6 104.1 118.4C81.6 155.2 40.8 188.1 -8.4 196.5C-57.5 204.8 -115 188.7 -151 151.9C-187 115 -201.5 57.5 -190.8 10.7C-180.1 -36.1 -144.1 -72.1 -108.1 -117.1C-72.1 -162.1 -36.1 -216.1 5.2 -221.2C46.4 -226.4 92.9 -182.9 115.4 -137.9"
+            fill="#BB004B"
+          ></path>
+        </g>
+      </svg>
 
-      <!-- Section 2 -->
-      <section class="blobs">
-        <h1>Thank you!</h1>
-        <p>Presented by return to_sleep</p>
-      </section>
+      <script>
+        const tween = KUTE.fromTo(
+          '#blob1',
+          { path: '#blob1' },
+          { path: '#blob2' },
+          { repeat: 999, duration: 3000, yoyo: true },
+        ).start();
+      </script>
+    </section>
 
-</body>
+    <div class="spacer layer2"></div>
+
+    <!-- Section 2 -->
+    <section class="blobs">
+      <h1 class="customFont">Thank you!</h1>
+      <p>Presented by return to_sleep</p>
+    </section>
+  </body>
 </html>
