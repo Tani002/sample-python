@@ -7,7 +7,7 @@ from sklearn.metrics import mean_squared_error
 import numpy as np
 
 # Step 1: Load the data
-data = pd.read_csv("VolumeDemand.csv")
+data = pd.read_csv("ARIMA/csv/VolumeDemand.csv")
 
 # To avoid using scientific notation
 pd.set_option("display.float_format", lambda x: "%d" % x)

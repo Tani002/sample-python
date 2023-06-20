@@ -11,7 +11,7 @@ import pickle
 warnings.filterwarnings("ignore")
 
 # Step 1: Load the data
-data = pd.read_csv('VolumeProduction.csv')
+data = pd.read_csv('ARIMA/csv/VolumeProduction.csv')
 
 # Convert 'Year' column to string type
 data['Year'] = data['Year'].astype(str)
@@ -120,6 +120,6 @@ model_fit = model.fit()
 # plt.legend()
 # plt.show()
 
-with open('ARIMA_VP.pkl', 'wb') as f:
+with open('ARIMA/ARIMA_VP.pkl', 'wb') as f:
     pickle.dump(model_fit, f)
 
