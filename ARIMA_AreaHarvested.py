@@ -8,15 +8,16 @@ import numpy as np
 
 import warnings
 import pickle
+
 warnings.filterwarnings("ignore")
 
 # Step 1: Load the data
-data = pd.read_csv('ARIMA/csv/AreaHarvested.csv')
+data = pd.read_csv("ARIMA/csv/AreaHarvested.csv")
 
 # Convert 'Year' column to string type
-data['Year'] = data['Year'].astype(str)
+data["Year"] = data["Year"].astype(str)
 # Create a new column combining 'Year' and 'TimePeriod'
-data['YearQuarter'] = data['Year'] + '-' + data['TimePeriod']
+data["YearQuarter"] = data["Year"] + "-" + data["TimePeriod"]
 
 # # Plot the time series data
 # plt.figure(figsize=(12, 6))
@@ -28,7 +29,7 @@ data['YearQuarter'] = data['Year'] + '-' + data['TimePeriod']
 # plt.show()
 
 # Take the logarithm of the 'AreaHarvested' column
-data['AreaHarvested_log'] = np.log(data['AreaHarvested'])
+data["AreaHarvested_log"] = np.log(data["AreaHarvested"])
 
 # # Plot the logarithm of the time series data
 # plt.figure(figsize=(12, 6))
@@ -39,7 +40,7 @@ data['AreaHarvested_log'] = np.log(data['AreaHarvested'])
 # plt.xticks(rotation=90)  # Rotate x-axis labels for better visibility
 # plt.show()
 
-train_data = data['AreaHarvested_log'].iloc[:int(len(data) * 0.7)]
+train_data = data["AreaHarvested_log"].iloc[: int(len(data) * 0.7)]
 
 # Step 2: Check for stationarity and determine ARIMA model parameters
 
@@ -51,7 +52,7 @@ train_data = data['AreaHarvested_log'].iloc[:int(len(data) * 0.7)]
 # print('Critical Values:')
 # for key, value in result[4].items():
 #     print(f'{key}:{value}')
-    
+
 # Difference time series data for stationarity
 train_data_diff = train_data.diff().dropna()
 
@@ -71,12 +72,14 @@ model_fit = model.fit()
 # print(model_fit.summary())
 
 # Step 4: Make time series predictions
-test_data = data['AreaHarvested_log'].iloc[int(len(data) * 0.7):]
+test_data = data["AreaHarvested_log"].iloc[int(len(data) * 0.7) :]
 forecast = model_fit.forecast(steps=len(test_data))
 
 # Step 5: Combine actual and forecasted data for plotting
-combined_data = pd.concat([data[['YearQuarter', 'AreaHarvested_log']], pd.Series(forecast)], axis=1)
-combined_data.columns = ['Year', 'Actual', 'Forecast']
+combined_data = pd.concat(
+    [data[["YearQuarter", "AreaHarvested_log"]], pd.Series(forecast)], axis=1
+)
+combined_data.columns = ["Year", "Actual", "Forecast"]
 
 # # Plot the actual and forecasted data
 # plt.figure(figsize=(12, 6))
@@ -90,7 +93,11 @@ combined_data.columns = ['Year', 'Actual', 'Forecast']
 # plt.show()
 
 # Step 6: Evaluate model predictions
-from sklearn.metrics import mean_absolute_error, mean_absolute_percentage_error, mean_squared_error
+from sklearn.metrics import (
+    mean_absolute_error,
+    mean_absolute_percentage_error,
+    mean_squared_error,
+)
 
 mae = mean_absolute_error(test_data, forecast)
 mape = mean_absolute_percentage_error(test_data, forecast)
@@ -104,7 +111,7 @@ rmse = np.sqrt(mean_squared_error(test_data, forecast))
 # num_years = int(input('\nEnter the number of years ahead to predict: '))
 
 # Fit the ARIMA model using the actual series
-train_data = data['AreaHarvested'].iloc[:int(len(data) * 0.7)]
+train_data = data["AreaHarvested"].iloc[: int(len(data) * 0.7)]
 model = ARIMA(train_data, order=(4, 1, 0))
 model_fit = model.fit()
 
@@ -132,5 +139,5 @@ model_fit = model.fit()
 # plt.legend()
 # plt.show()
 
-with open('ARIMA/ARIMA_AH.pkl', 'wb') as f:
+with open("ARIMA/ARIMA_AH.pkl", "wb") as f:
     pickle.dump(model_fit, f)

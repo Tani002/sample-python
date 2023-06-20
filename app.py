@@ -5,7 +5,7 @@ import pandas as pd
 from statsmodels.tsa.arima.model import ARIMA
 import pyrebase
 import firebase_admin
-from firebase_admin import credentials, firestore, auth, exceptions
+from firebase_admin import credentials, firestore, auth
 
 app = Flask(__name__)
 app.secret_key = "secret"
@@ -32,7 +32,7 @@ config = {
 }
 
 firebase = pyrebase.initialize_app(config)
-auth = firebase.auth()
+firebase_auth = firebase.auth()
 
 # Initialize the app with the service account credentials
 cred = credentials.Certificate(
@@ -69,7 +69,6 @@ def forecasting():
 
             data["AreaHarvested_log"] = np.log(data["AreaHarvested"])
             train_data = data["AreaHarvested_log"].iloc[: int(len(data) * 0.7)]
-            train_data_diff = train_data.diff().dropna()
 
             # Step 3: Fit the ARIMA model
             model = ARIMA(train_data, order=(4, 1, 0))
@@ -156,7 +155,6 @@ def forecasting():
 
             data["VolumeProduction_log"] = np.log(data["VolumeProduction"])
             train_data = data["VolumeProduction_log"].iloc[: int(len(data) * 0.7)]
-            train_data_diff = train_data.diff().dropna()
 
             # Step 3: Fit the ARIMA model
             model = ARIMA(train_data, order=(4, 1, 0))
@@ -246,7 +244,6 @@ def forecasting():
 
             data["FarmgatePrices"] = np.log(data["FarmgatePrices"])
             train_data = data["FarmgatePrices"].iloc[: int(len(data) * 0.7)]
-            train_data_diff = train_data.diff().dropna()
 
             # Step 3: Fit the ARIMA model
             model = ARIMA(train_data, order=(4, 1, 0))
@@ -336,7 +333,6 @@ def forecasting():
 
             data["VolumeDemand"] = np.log(data["VolumeDemand"])
             train_data = data["VolumeDemand"].iloc[: int(len(data) * 0.7)]
-            train_data_diff = train_data.diff().dropna()
 
             # Step 3: Fit the ARIMA model
             model = ARIMA(train_data, order=(4, 1, 0))

@@ -106,7 +106,7 @@ rmse = np.sqrt(mean_squared_error(test_data, forecast))
 
 # Make actual predictions
 # User input for prediction
-# num_years = int(input("\nEnter the number of years ahead to predict: "))
+num_years = int(input("\nEnter the number of years ahead to predict: "))
 
 # Fit the ARIMA model using the actual series
 train_data = data["VolumeDemand"].iloc[: int(len(data) * 0.7)]
