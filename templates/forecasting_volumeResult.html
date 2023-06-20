@@ -589,10 +589,20 @@ textarea:hover {
         <h2>Textual representation:</h2>
         <p>
             The Volume Production forecast presents that the future Volume Production in Nueva Vizcaya in the next {{ number }} years:
-           <p> - Quarter 1 of years 2023-2025 will increase. </p>
-           <p> - Quarter 2 of years 2023-2025 will decline. </p>
-           <p> - Quarter 3 of years 2023-2025 will decline. </p>
-           <p> - Quarter 4 of years 2023-2025 will increase. </p>
+            <h2>Percentage Change:</h2>
+            <ul>
+        {% for change in formatted_changes %}
+          <p>{{ change }}</p>
+        {% endfor %}
+            </ul>
+            <!-- Display the average percent change -->
+            <p>Average Percent Change: {{ average_percent_change }}%</p>
+            <!-- Conditionally display output based on the sign of the average percent change -->
+            {% if average_percent_change > 0 %}
+            <p>The average percent change is positive: It implies a rise in the prices at which farmers sell their tomatoes directly at the farmgate. This can suggest increased demand or limited supply in the market, potentially leading to higher profitability for tomato farmers.</p>
+            {% elif average_percent_change < 0 %}
+            <p>It implies a decline in farmgate prices, which may be due to factors such as oversupply, decreased demand, or market competition. It can indicate challenges in profitability for tomato farmers and may require adjustments in marketing strategies or cost management.</p>
+            {% endif %}
         </p>
         </p>
         

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Update Profile</title>
+</head>
+<body>
+    <h1>Update Profile</h1>
+
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <ul class="messages">
+                {% for message in messages %}
+                    <li>{{ message }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    {% endwith %}
+
+    <form method="POST" action="/update_profile">
+        <label for="new_email">New Email:</label>
+        <input type="email" name="new_email" id="new_email" required>
+
+        <label for="new_password">New Password:</label>
+        <input type="password" name="new_password" id="new_password" required>
+
+        <label for="current_password">Current Password:</label>
+        <input type="password" name="current_password" id="current_password" required>
+
+        <input type="submit" value="Update">
+    </form>
+</body>
+</html>

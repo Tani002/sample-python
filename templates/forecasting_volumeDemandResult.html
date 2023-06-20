@@ -565,7 +565,7 @@ textarea:hover {
 
       <!-- Section 5 -->
       <section>
-        <h2>Here are the forecasted results of future Farmgate Prices in the future year-quarter (in hectares):</h2>
+        <h2>Here are the forecasted results of future Volume Demand in the future year-quarter (in hectares):</h2>
 
         <p>
           <!-- Display the forecasted data here -->
@@ -586,26 +586,25 @@ textarea:hover {
                 </tr>
             {% endfor %}
         </table>
-        <h2>Textual representations:</h2>
+        <h2>Textual representation:</h2>
         <p>
-            The Farmgate Prices forecast presents that the future Farmgate Prices in Nueva Vizcaya in the next {{ number }} years:
+            The Volume Demand forecast presents that the future Volume Demand in Nueva Vizcaya in the next {{ number }} years:
             <h2>Percentage Change:</h2>
             <ul>
-        {% for change in formatted_changes %}
-          <p>{{ change }}</p>
-        {% endfor %}
-            </ul>
+              {% for change in formatted_changes %}
+                <p>{{ change }}</p>
+              {% endfor %}
+            </ul>           
             <!-- Display the average percent change -->
-            <p>Average Percent Change: {{ average_percent_change }}%</p>
-            <!-- Conditionally display output based on the sign of the average percent change -->
-            {% if average_percent_change > 0 %}
-            <p>The average percent change is positive: It implies a rise in the prices at which farmers sell their tomatoes directly at the farmgate. This can suggest increased demand or limited supply in the market, potentially leading to higher profitability for tomato farmers.</p>
-            {% elif average_percent_change < 0 %}
-            <p>It implies a decline in farmgate prices, which may be due to factors such as oversupply, decreased demand, or market competition. It can indicate challenges in profitability for tomato farmers and may require adjustments in marketing strategies or cost management.</p>
-            {% endif %}
+           <p>Average Percent Change: {{ average_percent_change }}%</p>
+           <!-- Conditionally display output based on the sign of the average percent change -->
+           {% if average_percent_change > 0 %}
+           <p>The average percent change is positive: It implies an expansion in the overall tomato production levels. This can suggest improved farming practices, increased efficiency, or larger cultivated areas. It may indicate the potential for higher sales volumes and revenue for tomato farmers.</p>
+           {% elif average_percent_change < 0 %}
+           <p>It implies a decrease in the overall production levels of tomatoes. This could be due to factors such as adverse weather conditions, pest and disease outbreaks, or other challenges in cultivation. It may require farmers to evaluate their production methods, implement risk management strategies, or explore alternative crops to maintain profitability.</p>
+           {% endif %}
         </p>
         </p>
-        
         
       </section>
 
@@ -647,7 +646,7 @@ textarea:hover {
                             tickangle: -90
                         },
                         yaxis: {
-                            title: 'Farmgate Prices'
+                            title: 'Volume Demand'
                         }
                     };
             
